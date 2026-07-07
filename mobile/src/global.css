@@ -1,0 +1,52 @@
+@import "tailwindcss/theme.css" layer(theme);
+@import "tailwindcss/preflight.css" layer(base);
+@import "tailwindcss/utilities.css";
+
+@layer theme {
+  @theme {
+    --color-app-bg: #050816;
+    --color-app-surface: #0c1220;
+    --color-app-surface-elevated: #121a2d;
+    --color-app-surface-muted: #0a101d;
+    --color-app-border: #192338;
+    --color-app-border-strong: #2b3a59;
+    --color-app-primary: #8fb5ff;
+    --color-app-primary-strong: #6f8dff;
+    --color-app-primary-soft: #16274a;
+    --color-app-secondary: #5ee4c4;
+    --color-app-text: #f5f7fb;
+    --color-app-contrast: #08101f;
+    --color-app-muted: #98a4bc;
+    --color-app-subtle: #65718c;
+    --color-app-danger: #ff6e8f;
+    --color-app-success: #3ed598;
+    --color-app-success-soft: #0e2b24;
+    --color-app-warning: #f2c56d;
+    --color-app-glow: #13274a;
+    --color-app-glow-alt: #10302a;
+    --color-app-overlay: #09101f;
+  }
+}
+
+html,
+body {
+  background-color: #050816;
+}
+
+@media android {
+  :root {
+    --font-sans: normal;
+    --font-serif: serif;
+    --font-mono: monospace;
+    --font-rounded: normal;
+  }
+}
+
+@media ios {
+  :root {
+    --font-sans: system-ui;
+    --font-serif: ui-serif;
+    --font-mono: ui-monospace;
+    --font-rounded: ui-rounded;
+  }
+}
