@@ -1,4 +1,4 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, router } from "expo-router";
@@ -29,8 +29,8 @@ export default function SignInScreen() {
   } = useForm<SignInFormValues>({
     resolver: zodResolver(signInSchema),
     defaultValues: {
-      email: "demo@finmate.ai",
-      password: "secret123",
+      email: "",
+      password: "",
     },
   });
 
@@ -52,14 +52,13 @@ export default function SignInScreen() {
 
   return (
     <ScreenWrapper
-      eyebrow="Access"
-      title="FinMate AI"
-      subtitle="Sign in with your account and continue directly to your dashboard."
+      eyebrow="Welcome back"
+      title="FinMate"
+      subtitle="See your balance, spending, and recent activity in one calm dashboard."
     >
       <Card
-        eyebrow="Wallet"
-        title="Login"
-        description="This screen now authenticates against the backend and stores your session token securely on the device."
+        title="Sign in"
+        description="Use your existing account to continue. Nothing about the auth flow changes here."
         variant="elevated"
       >
         <View className="gap-4">
@@ -72,7 +71,7 @@ export default function SignInScreen() {
                 autoCapitalize="none"
                 keyboardType="email-address"
                 onChangeText={onChange}
-                placeholder="Email"
+                placeholder="you@example.com"
                 value={value}
                 error={errors.email?.message}
               />
@@ -87,7 +86,7 @@ export default function SignInScreen() {
                 label="Password"
                 secureTextEntry
                 onChangeText={onChange}
-                placeholder="Password"
+                placeholder="Your password"
                 value={value}
                 error={errors.password?.message}
               />
@@ -100,26 +99,19 @@ export default function SignInScreen() {
             </Text>
           ) : null}
 
-          <Button
-            onPress={handleSubmit(onSubmit)}
-            disabled={isLoading}
-            subtitle={isLoading ? "Contacting the backend" : "JWT stored securely with Expo SecureStore"}
-          >
-            {isLoading ? "Signing in..." : "Go to dashboard"}
+          <Button onPress={handleSubmit(onSubmit)} disabled={isLoading} size="lg">
+            {isLoading ? "Signing in..." : "Open dashboard"}
           </Button>
         </View>
       </Card>
 
       <Card
-        title="Need an account?"
-        description="Register once and the app will persist your access token for future launches."
+        title="New to FinMate?"
+        description="Create an account with your monthly budget and preferred currency."
       >
         <Link href="/(auth)/sign-up" asChild>
-          <Button variant="secondary">Create an account</Button>
+          <Button variant="secondary">Create account</Button>
         </Link>
-        <Text className="text-[13px] leading-[18px] text-app-subtle">
-          Demo access uses `demo@finmate.ai` and `secret123`.
-        </Text>
       </Card>
     </ScreenWrapper>
   );

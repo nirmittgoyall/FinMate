@@ -1,11 +1,14 @@
-﻿import "../src/global.css";
+﻿import * as SystemUI from "expo-system-ui";
+import "../src/global.css";
 
 import { useEffect } from "react";
 
 import * as SplashScreen from "expo-splash-screen";
 import { Stack } from "expo-router";
 import { StatusBar } from "expo-status-bar";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
+import { colors } from "@/constants/colors";
 import { useAuthStore } from "@/store/auth-store";
 
 void SplashScreen.preventAutoHideAsync().catch(() => {
@@ -21,6 +24,10 @@ export default function RootLayout() {
   }, [hydrateSession]);
 
   useEffect(() => {
+    void SystemUI.setBackgroundColorAsync(colors.background).catch(() => {});
+  }, []);
+
+  useEffect(() => {
     if (isHydrated) {
       void SplashScreen.hideAsync();
     }
@@ -31,13 +38,13 @@ export default function RootLayout() {
   }
 
   return (
-    <>
+    <GestureHandlerRootView style={{ flex: 1, backgroundColor: colors.background }}>
       <StatusBar style="light" />
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="index" />
         <Stack.Screen name="(auth)" />
         <Stack.Screen name="(tabs)" />
       </Stack>
-    </>
+    </GestureHandlerRootView>
   );
 }

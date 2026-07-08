@@ -1,9 +1,11 @@
-﻿export type SessionUser = {
+import type { SupportedCurrency } from "@/constants/finance";
+
+export type SessionUser = {
   id: string;
   name: string;
   email: string;
   monthlyBudget: number;
-  currency: string;
+  currency: SupportedCurrency;
   createdAt: string;
 };
 

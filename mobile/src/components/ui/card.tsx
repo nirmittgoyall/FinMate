@@ -1,11 +1,11 @@
-import type { ReactNode } from "react";
+﻿import type { ReactNode } from "react";
 
 import { spacing } from "@/constants/spacing";
 import { typography } from "@/constants/typography";
 import { cn } from "@/lib/utils/cn";
 import { Text, View } from "@/tw";
 
-type CardVariant = "default" | "elevated" | "muted";
+type CardVariant = "default" | "elevated" | "muted" | "glass";
 
 type CardProps = {
   title?: string;
@@ -21,6 +21,8 @@ const variantClasses: Record<CardVariant, string> = {
   default: "bg-app-surface border-app-border",
   elevated: "bg-app-surface-elevated border-app-border-strong",
   muted: "bg-app-surface-muted border-app-border",
+  glass:
+    "bg-app-surface-elevated/70 border-app-glass-border shadow-2xl shadow-black/40",
 };
 
 export function Card({
@@ -35,12 +37,19 @@ export function Card({
   return (
     <View
       className={cn(
-        "rounded-[28px] border",
+        "overflow-hidden rounded-[30px] border",
         spacing.cardPadding,
         variantClasses[variant],
         className
       )}
     >
+      {variant === "glass" ? (
+        <View
+          className="absolute inset-x-0 top-0 h-px bg-app-glass-highlight"
+          pointerEvents="none"
+        />
+      ) : null}
+
       {eyebrow || title || description ? (
         <View className={cn("gap-2", contentClassName)}>
           {eyebrow ? <Text className={typography.eyebrow}>{eyebrow}</Text> : null}

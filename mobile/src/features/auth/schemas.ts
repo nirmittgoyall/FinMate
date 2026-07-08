@@ -1,4 +1,6 @@
-﻿import { z } from "zod";
+import { z } from "zod";
+
+import { supportedCurrencies } from "@/constants/finance";
 
 export const signInSchema = z.object({
   email: z
@@ -28,13 +30,9 @@ export const signUpSchema = signInSchema.extend({
     .refine((value) => Number(value) >= 0, {
       message: "Monthly budget cannot be negative.",
     }),
-  currency: z
-    .string()
-    .trim()
-    .length(3, "Currency must be a 3-letter code.")
-    .refine((value) => /^[A-Za-z]{3}$/.test(value), {
-      message: "Currency must contain only letters.",
-    }),
+  currency: z.enum(supportedCurrencies, {
+    error: "Select a supported currency.",
+  }),
 });
 
 export type SignInFormValues = z.infer<typeof signInSchema>;

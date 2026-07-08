@@ -1,6 +1,13 @@
 import { z } from "zod";
 
+import {
+  expenseCategories,
+  incomeCategories,
+  paymentMethodOptions,
+} from "@/constants/finance";
 import { transactionTypes } from "@/types/transaction";
+
+const transactionCategories = [...expenseCategories, ...incomeCategories] as const;
 
 export const transactionSchema = z.object({
   title: z.string().trim().min(2, "Title is required."),
@@ -14,8 +21,12 @@ export const transactionSchema = z.object({
     .refine((value) => Number(value) > 0, {
       message: "Amount must be greater than zero.",
     }),
-  category: z.string().trim().min(2, "Category is required."),
-  paymentMethod: z.string().trim().min(2, "Payment method is required."),
+  category: z.enum(transactionCategories, {
+    error: "Select a category.",
+  }),
+  paymentMethod: z.enum(paymentMethodOptions, {
+    error: "Select a payment method.",
+  }),
   note: z.string().trim().max(240, "Note must be 240 characters or less."),
   date: z
     .string()

@@ -1,10 +1,11 @@
-﻿import { useState } from "react";
+import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Link, router } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
 
-import { Button, Card, Input, ScreenWrapper } from "@/components/ui";
+import { currencyOptions } from "@/constants/finance";
+import { Button, Card, Input, ScreenWrapper, SelectField } from "@/components/ui";
 import {
   applyServerFieldErrors,
   getErrorMessage,
@@ -33,7 +34,7 @@ export default function SignUpScreen() {
       email: "",
       password: "",
       monthlyBudget: "",
-      currency: "USD",
+      currency: "INR",
     },
   });
 
@@ -55,14 +56,13 @@ export default function SignUpScreen() {
 
   return (
     <ScreenWrapper
-      eyebrow="Onboarding"
-      title="Create account"
-      subtitle="Register against the backend, store the access token securely, and land in the dashboard immediately."
+      eyebrow="Create account"
+      title="Set up your money space"
+      subtitle="Add your monthly budget and currency once, then start tracking expenses clearly."
     >
       <Card
-        eyebrow="Profile"
-        title="Register"
-        description="The form matches the backend contract, including monthly budget and currency."
+        title="Your details"
+        description="Keep this simple. Your budget and currency power the dashboard as soon as you sign in."
         variant="elevated"
       >
         <View className="gap-4">
@@ -73,7 +73,7 @@ export default function SignUpScreen() {
               <Input
                 label="Full name"
                 onChangeText={onChange}
-                placeholder="Full name"
+                placeholder="Aman Sharma"
                 value={value}
                 error={errors.name?.message}
               />
@@ -89,7 +89,7 @@ export default function SignUpScreen() {
                 autoCapitalize="none"
                 keyboardType="email-address"
                 onChangeText={onChange}
-                placeholder="Email"
+                placeholder="you@example.com"
                 value={value}
                 error={errors.email?.message}
               />
@@ -104,7 +104,7 @@ export default function SignUpScreen() {
                 label="Password"
                 secureTextEntry
                 onChangeText={onChange}
-                placeholder="Password"
+                placeholder="At least 8 characters"
                 value={value}
                 error={errors.password?.message}
               />
@@ -119,7 +119,7 @@ export default function SignUpScreen() {
                 label="Monthly budget"
                 keyboardType="decimal-pad"
                 onChangeText={onChange}
-                placeholder="2500"
+                placeholder="25000"
                 value={value}
                 error={errors.monthlyBudget?.message}
               />
@@ -130,13 +130,11 @@ export default function SignUpScreen() {
             control={control}
             name="currency"
             render={({ field: { onChange, value } }) => (
-              <Input
+              <SelectField
                 label="Currency"
-                autoCapitalize="characters"
-                maxLength={3}
-                onChangeText={onChange}
-                placeholder="USD"
                 value={value}
+                onValueChange={onChange}
+                options={currencyOptions}
                 error={errors.currency?.message}
               />
             )}
@@ -150,21 +148,17 @@ export default function SignUpScreen() {
 
           <Button
             onPress={handleSubmit(onSubmit)}
-            variant="secondary"
             disabled={isLoading}
-            subtitle={isLoading ? "Creating your account" : "Backend registration with secure token persistence"}
+            size="lg"
           >
             {isLoading ? "Creating account..." : "Create account"}
           </Button>
         </View>
       </Card>
 
-      <Card
-        title="Already registered?"
-        description="Return to login and reuse your existing credentials."
-      >
+      <Card title="Already have an account?" description="Sign in and continue from your dashboard.">
         <Link href="/(auth)/sign-in" asChild>
-          <Button variant="ghost">Return to login</Button>
+          <Button variant="secondary">Sign in</Button>
         </Link>
       </Card>
     </ScreenWrapper>

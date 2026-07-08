@@ -1,9 +1,17 @@
-import { Stack } from "expo-router";
+﻿import { Stack } from "expo-router";
+
+import { colors } from "@/constants/colors";
 
 export default function ProfileStackLayout() {
   return (
-    <Stack>
-      <Stack.Screen name="index" options={{ title: "Profile" }} />
+    <Stack
+      screenOptions={{
+        headerShown: false,
+        animation: "fade_from_bottom",
+        contentStyle: { backgroundColor: colors.background },
+      }}
+    >
+      <Stack.Screen name="index" />
     </Stack>
   );
 }

@@ -1,36 +1,47 @@
-@import "tailwindcss/theme.css" layer(theme);
+﻿@import "tailwindcss/theme.css" layer(theme);
 @import "tailwindcss/preflight.css" layer(base);
 @import "tailwindcss/utilities.css";
 
 @layer theme {
   @theme {
-    --color-app-bg: #050816;
-    --color-app-surface: #0c1220;
-    --color-app-surface-elevated: #121a2d;
-    --color-app-surface-muted: #0a101d;
-    --color-app-border: #192338;
-    --color-app-border-strong: #2b3a59;
-    --color-app-primary: #8fb5ff;
-    --color-app-primary-strong: #6f8dff;
-    --color-app-primary-soft: #16274a;
-    --color-app-secondary: #5ee4c4;
-    --color-app-text: #f5f7fb;
-    --color-app-contrast: #08101f;
-    --color-app-muted: #98a4bc;
-    --color-app-subtle: #65718c;
-    --color-app-danger: #ff6e8f;
-    --color-app-success: #3ed598;
-    --color-app-success-soft: #0e2b24;
-    --color-app-warning: #f2c56d;
-    --color-app-glow: #13274a;
-    --color-app-glow-alt: #10302a;
-    --color-app-overlay: #09101f;
+    --color-app-bg: #05070d;
+    --color-app-surface: #0e1627;
+    --color-app-surface-elevated: #131d33;
+    --color-app-surface-muted: #09111f;
+    --color-app-border: #18243b;
+    --color-app-border-strong: #283a5e;
+    --color-app-primary: #7c5cff;
+    --color-app-primary-strong: #ad9dff;
+    --color-app-primary-soft: #18152c;
+    --color-app-secondary: #7cb7ff;
+    --color-app-secondary-soft: #0f1a30;
+    --color-app-text: #f6f7fb;
+    --color-app-contrast: #05070d;
+    --color-app-muted: #98a5c4;
+    --color-app-subtle: #66738f;
+    --color-app-danger: #ff6b7a;
+    --color-app-success: #5dd5a2;
+    --color-app-success-soft: #0d1f19;
+    --color-app-warning: #f7c46a;
+    --color-app-glow: #141d31;
+    --color-app-glow-alt: #0b1220;
+
+    /* FIX: was solid #05070d, now matches colors.ts (translucent) */
+    --color-app-overlay: rgba(5, 7, 13, 0.88);
+
+    /* NEW: was missing, colors.ts already defined it */
+    --color-app-tab-bar: rgba(10, 14, 24, 0.94);
+
+    /* NEW: cinematic glass/glow redesign */
+    --color-app-glow-core: rgba(124, 92, 255, 0.35);
+    --color-app-glass-highlight: rgba(255, 255, 255, 0.06);
+    --color-app-glass-border: rgba(255, 255, 255, 0.08);
   }
 }
 
 html,
 body {
-  background-color: #050816;
+  background-color: #05070d;
 }
 
 @media android {
@@ -47,6 +58,6 @@ body {
     --font-sans: system-ui;
     --font-serif: ui-serif;
     --font-mono: ui-monospace;
-    --font-rounded: ui-rounded;
+    --font-rounded: system-ui;
   }
 }

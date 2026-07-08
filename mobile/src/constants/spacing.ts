@@ -1,9 +1,9 @@
-export const spacing = {
-  screenPadding: "px-5 pb-10 pt-3",
-  screenGap: "gap-6",
-  sectionGap: "gap-5",
-  cardPadding: "p-5",
-  compactCardPadding: "p-4",
-  buttonPadding: "px-4 py-4",
-  inputPadding: "px-4 py-4",
+﻿export const spacing = {
+  screenPadding: "px-6 pb-12 pt-2",
+  screenGap: "gap-7",
+  sectionGap: "gap-6",
+  cardPadding: "px-5 py-5",
+  compactCardPadding: "px-4 py-4",
+  buttonPadding: "px-5 py-4",
+  inputPadding: "px-5 py-4",
 };
