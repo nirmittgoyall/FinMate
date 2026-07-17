@@ -1,6 +1,6 @@
 ﻿export const typography = {
   eyebrow:
-    "text-[11px] font-medium uppercase tracking-[0.24em] text-app-subtle",
+    "text-[11px] font-medium uppercase tracking-[0.24em] text-app-text",
   hero: "text-[40px] leading-[44px] font-semibold tracking-[-0.05em] text-app-text",
   screenTitle:
     "text-[34px] leading-[38px] font-semibold tracking-[-0.05em] text-app-text",

@@ -87,7 +87,7 @@ export default function HomeScreen() {
                 <Text className="text-[15px] tracking-[-0.02em] text-app-muted">
                   {getGreeting()}, {firstName}
                 </Text>
-                <Text className="text-[30px] leading-[34px] font-semibold tracking-[-0.04em] text-app-text">
+                <Text className="text-[30px] leading-8.5 font-semibold tracking-[-0.04em] text-app-text">
                   Dashboard
                 </Text>
               </View>

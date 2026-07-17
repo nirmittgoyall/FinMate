@@ -4,44 +4,39 @@
 
 @layer theme {
   @theme {
-    --color-app-bg: #05070d;
-    --color-app-surface: #0e1627;
-    --color-app-surface-elevated: #131d33;
-    --color-app-surface-muted: #09111f;
-    --color-app-border: #18243b;
-    --color-app-border-strong: #283a5e;
-    --color-app-primary: #7c5cff;
-    --color-app-primary-strong: #ad9dff;
-    --color-app-primary-soft: #18152c;
-    --color-app-secondary: #7cb7ff;
-    --color-app-secondary-soft: #0f1a30;
-    --color-app-text: #f6f7fb;
-    --color-app-contrast: #05070d;
-    --color-app-muted: #98a5c4;
-    --color-app-subtle: #66738f;
-    --color-app-danger: #ff6b7a;
-    --color-app-success: #5dd5a2;
-    --color-app-success-soft: #0d1f19;
-    --color-app-warning: #f7c46a;
-    --color-app-glow: #141d31;
-    --color-app-glow-alt: #0b1220;
+    --color-app-bg: #F5F4F0;
+    --color-app-surface: #FFFFFF;
+    --color-app-surface-elevated: #FFFFFF;
+    --color-app-surface-muted: #EDEBE5;
+    --color-app-border: #E4E1D9;
+    --color-app-border-strong: #D2CDC1;
+    --color-app-primary: #16161C;
+    --color-app-primary-strong: #000000;
+    --color-app-primary-soft: #ECEBE7;
+    --color-app-secondary: #6B6F76;
+    --color-app-secondary-soft: #EFEEEC;
+    --color-app-text: #16161C;
+    --color-app-contrast: #FFFFFF;
+    --color-app-muted: #6E6B66;
+    --color-app-subtle: #A29D93;
+    --color-app-danger: #D9483C;
+    --color-app-success: #1E8E5A;
+    --color-app-success-soft: #E7F5EE;
+    --color-app-warning: #C98A2E;
+    --color-app-glow: #EDEAE2;
+    --color-app-glow-alt: #F0EEE8;
+    --color-app-overlay: rgba(20, 18, 15, 0.45);
+    --color-app-tab-bar: rgba(255, 255, 255, 0.92);
 
-    /* FIX: was solid #05070d, now matches colors.ts (translucent) */
-    --color-app-overlay: rgba(5, 7, 13, 0.88);
-
-    /* NEW: was missing, colors.ts already defined it */
-    --color-app-tab-bar: rgba(10, 14, 24, 0.94);
-
-    /* NEW: cinematic glass/glow redesign */
-    --color-app-glow-core: rgba(124, 92, 255, 0.35);
-    --color-app-glass-highlight: rgba(255, 255, 255, 0.06);
-    --color-app-glass-border: rgba(255, 255, 255, 0.08);
+    --color-app-glow-core: rgba(120, 110, 90, 0.10);
+    --color-app-glass-highlight: rgba(255, 255, 255, 0.9);
+    --color-app-glass-border: rgba(20, 18, 15, 0.06);
   }
 }
 
 html,
 body {
-  background-color: #05070d;
+  background-color: #F5F4F0;
 }
 
 @media android {

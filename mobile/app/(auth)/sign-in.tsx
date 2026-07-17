@@ -1,10 +1,12 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Ionicons } from "@expo/vector-icons";
 import { Link, router } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
 
-import { Button, Card, Input, ScreenWrapper } from "@/components/ui";
+import { AmbientGlow, Button, Input, ScreenWrapper } from "@/components/ui";
+import { colors } from "@/constants/colors";
 import {
   applyServerFieldErrors,
   getErrorMessage,
@@ -14,7 +16,9 @@ import {
   type SignInFormValues,
 } from "@/features/auth/schemas";
 import { useAuthStore } from "@/store/auth-store";
-import { Text, View } from "@/tw";
+import { Pressable, Text, View } from "@/tw";
+import { FlatList } from "react-native-gesture-handler";
+import { TouchableHighlight } from "react-native";
 
 export default function SignInScreen() {
   const signIn = useAuthStore((state) => state.signIn);
@@ -51,17 +55,28 @@ export default function SignInScreen() {
   };
 
   return (
-    <ScreenWrapper
-      eyebrow="Welcome back"
-      title="FinMate"
-      subtitle="See your balance, spending, and recent activity in one calm dashboard."
-    >
-      <Card
-        title="Sign in"
-        description="Use your existing account to continue. Nothing about the auth flow changes here."
-        variant="elevated"
-      >
-        <View className="gap-4">
+    <View className="flex-1 bg-app-bg">
+      <AmbientGlow size={360} x={0.5} y={0.05} />
+
+      <ScreenWrapper contentClassName="pb-32">
+        <View className="items-center gap-4 pt-6">
+          <View className="h-18 w-18 items-center justify-center rounded-full bg-app-primary">
+            <Ionicons name="wallet-outline" size={32} color={colors.contrast} />
+          </View>
+          <View className="items-center gap-0.5">
+            <Text className="text-[13px] font-medium uppercase tracking-[0.24em] text-app-muted">
+              Welcome
+            </Text>
+            <Text className="text-[55px] leading-[36px] font-bold tracking-[-0.03em] text-app-text">
+              Wisely
+            </Text>
+            {/* <Text className="text-center text-[11px] leading-[21px] text-app-muted">
+              See your balance, spending, and recent activity in one calm dashboard.
+            </Text> */}
+          </View>
+        </View>
+
+        <View className="mt-8 gap-5" marginBottom={4} marginTop={4} marginLeft={35} marginRight={35} alignItems="close" justifyContent="center" >
           <Controller
             control={control}
             name="email"
@@ -94,25 +109,36 @@ export default function SignInScreen() {
           />
 
           {submitError ? (
-            <Text className="text-[13px] leading-[18px] text-app-danger">
-              {submitError}
-            </Text>
+            <Text className="text-[13px] leading-[18px] text-app-danger">{submitError}</Text>
           ) : null}
 
-          <Button onPress={handleSubmit(onSubmit)} disabled={isLoading} size="lg">
+          <Button onPress={handleSubmit(onSubmit)} disabled={isLoading} size="lg" className="mt-2" marginBottom={0} marginTop={4} marginLeft={0} marginRight={0}>
             {isLoading ? "Signing in..." : "Open dashboard"}
           </Button>
         </View>
-      </Card>
 
-      <Card
-        title="New to FinMate?"
-        description="Create an account with your monthly budget and preferred currency."
-      >
-        <Link href="/(auth)/sign-up" asChild>
-          <Button variant="secondary">Create account</Button>
-        </Link>
-      </Card>
-    </ScreenWrapper>
+        <View className="mt-0 flex-row items-center justify-center gap-7">
+          <Pressable onPress={() => {}} className="h-14 w-14 items-center justify-center rounded-full bg-app-primary">
+              <Ionicons name="logo-google" size={22} color={colors.contrast} />
+          </Pressable>
+          <Pressable onPress={() => {}} className="h-14 w-14 items-center justify-center rounded-full bg-app-primary">
+              <Ionicons name="logo-apple" size={25} color={colors.contrast} />
+          </Pressable>
+          <Pressable onPress={() => {}} className="h-14 w-14 items-center justify-center rounded-full bg-app-primary">
+              <Ionicons name="mail" size={22} color={colors.contrast} />
+          </Pressable>
+        </View>
+
+
+          <View className="mt-5 flex-row items-center justify-center gap-1.5">
+            <Text className="text-[14px] text-app-muted">New to Wisely?</Text>
+            <Link href="/(auth)/sign-up" asChild>
+              <Pressable>
+                <Text className="text-[14px] font-semibold text-app-text">Create account</Text>
+              </Pressable>
+            </Link>
+          </View>
+      </ScreenWrapper>
+    </View>
   );
 }

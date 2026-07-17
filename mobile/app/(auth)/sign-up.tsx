@@ -1,11 +1,13 @@
 import { useState } from "react";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { Ionicons } from "@expo/vector-icons";
 import { Link, router } from "expo-router";
 import { Controller, useForm } from "react-hook-form";
 
 import { currencyOptions } from "@/constants/finance";
-import { Button, Card, Input, ScreenWrapper, SelectField } from "@/components/ui";
+import { AmbientGlow, Button, Input, ScreenWrapper, SelectField } from "@/components/ui";
+import { colors } from "@/constants/colors";
 import {
   applyServerFieldErrors,
   getErrorMessage,
@@ -15,7 +17,7 @@ import {
   type SignUpFormValues,
 } from "@/features/auth/schemas";
 import { useAuthStore } from "@/store/auth-store";
-import { Text, View } from "@/tw";
+import { Pressable, Text, View } from "@/tw";
 
 export default function SignUpScreen() {
   const signUp = useAuthStore((state) => state.signUp);
@@ -55,17 +57,25 @@ export default function SignUpScreen() {
   };
 
   return (
-    <ScreenWrapper
-      eyebrow="Create account"
-      title="Set up your money space"
-      subtitle="Add your monthly budget and currency once, then start tracking expenses clearly."
-    >
-      <Card
-        title="Your details"
-        description="Keep this simple. Your budget and currency power the dashboard as soon as you sign in."
-        variant="elevated"
-      >
-        <View className="gap-4">
+    <View className="flex-1 bg-app-bg">
+      <AmbientGlow size={320} x={0.5} y={0.02} />
+
+      <ScreenWrapper contentClassName="pb-16">
+        <View className="items-center gap-1 pt-6">
+          <View className="h-18 w-18 items-center justify-center rounded-full bg-app-primary">
+            <Ionicons name="wallet-outline" size={32} color={colors.contrast} />
+          </View>
+          <View className="items-center gap-0.5">
+            <Text className="text-[55px] leading-[36px] font-bold tracking-[-0.03em] text-app-text">
+              Wisely
+            </Text>
+            <Text className="text-[25px] stretch leading-[32px] tracking-[-0.03em] text-app-text">
+            Create your account
+          </Text>
+          </View>
+        </View>
+
+        <View className="mt-7 gap-4" marginBottom={16} marginTop={16} marginLeft={35} marginRight={35}>
           <Controller
             control={control}
             name="name"
@@ -111,56 +121,57 @@ export default function SignUpScreen() {
             )}
           />
 
-          <Controller
-            control={control}
-            name="monthlyBudget"
-            render={({ field: { onChange, value } }) => (
-              <Input
-                label="Monthly budget"
-                keyboardType="decimal-pad"
-                onChangeText={onChange}
-                placeholder="25000"
-                value={value}
-                error={errors.monthlyBudget?.message}
-              />
-            )}
-          />
+          <View className="flex-row gap-3">
+            <Controller
+              control={control}
+              name="monthlyBudget"
+              render={({ field: { onChange, value } }) => (
+                <Input
+                  containerClassName="flex-1"
+                  label="Monthly budget"
+                  keyboardType="decimal-pad"
+                  onChangeText={onChange}
+                  placeholder="25000"
+                  value={value}
+                  error={errors.monthlyBudget?.message}
+                />
+              )}
+            />
 
-          <Controller
-            control={control}
-            name="currency"
-            render={({ field: { onChange, value } }) => (
-              <SelectField
-                label="Currency"
-                value={value}
-                onValueChange={onChange}
-                options={currencyOptions}
-                error={errors.currency?.message}
-              />
-            )}
-          />
+            <Controller
+              control={control}
+              name="currency"
+              render={({ field: { onChange, value } }) => (
+                <SelectField
+                  containerClassName="flex-1"
+                  label="Currency"
+                  value={value}
+                  onValueChange={onChange}
+                  options={currencyOptions}
+                  error={errors.currency?.message}
+                />
+              )}
+            />
+          </View>
 
           {submitError ? (
-            <Text className="text-[13px] leading-[18px] text-app-danger">
-              {submitError}
-            </Text>
+            <Text className="text-[13px] leading-[18px] text-app-danger">{submitError}</Text>
           ) : null}
 
-          <Button
-            onPress={handleSubmit(onSubmit)}
-            disabled={isLoading}
-            size="lg"
-          >
+          <Button onPress={handleSubmit(onSubmit)} disabled={isLoading} size="lg" className="mt-2">
             {isLoading ? "Creating account..." : "Create account"}
           </Button>
         </View>
-      </Card>
 
-      <Card title="Already have an account?" description="Sign in and continue from your dashboard.">
-        <Link href="/(auth)/sign-in" asChild>
-          <Button variant="secondary">Sign in</Button>
-        </Link>
-      </Card>
-    </ScreenWrapper>
+        <View className="mt-8 flex-row items-center justify-center gap-1.5">
+          <Text className="text-[14px] text-app-muted">Already have an account?</Text>
+          <Link href="/(auth)/sign-in" asChild>
+            <Pressable>
+              <Text className="text-[14px] font-semibold text-app-text">Sign in</Text>
+            </Pressable>
+          </Link>
+        </View>
+      </ScreenWrapper>
+    </View>
   );
 }

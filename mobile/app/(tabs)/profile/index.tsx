@@ -38,7 +38,7 @@ export default function ProfileScreen() {
             <View className="gap-2">
               <Text className="text-[15px] tracking-[-0.02em] text-app-muted">Profile</Text>
               <Text className="text-[30px] leading-[34px] font-semibold tracking-[-0.04em] text-app-text">
-                Your FinMate space.
+                Your Wisely space.
               </Text>
               <Text className="text-[13px] leading-[18px] text-app-subtle">
                 Account details, money settings, and support links live here.
